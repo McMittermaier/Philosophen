@@ -21,11 +21,4 @@ public class Application {
         // baaaam on the internet
     }
 
-    void newMethode(){
-        // Some more
-        //and more to push
-
-
-    }
-
 }
