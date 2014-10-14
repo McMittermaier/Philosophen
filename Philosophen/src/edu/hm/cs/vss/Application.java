@@ -15,9 +15,6 @@ public class Application {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         // baaaam on the internet
-        System.out.println("LALA");
-        //So jetzt werkel ch hier ein bisschen
-        System.out.println("Die zweite");
     }
 
 }
