@@ -9,6 +9,8 @@ package edu.hm.cs.vss;
  */
 public class Application {
 
+    // dann ändern mir mal was  ...
+
     /**
      * @param args
      * 
