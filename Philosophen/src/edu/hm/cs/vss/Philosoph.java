@@ -15,6 +15,8 @@ public class Philosoph implements Runnable {
     private int firstfork;
     private int secondfork;
 
+
+
     private int seatNr;
 
     public Philosoph(Table myTable,int number){
@@ -30,45 +32,53 @@ public class Philosoph implements Runnable {
     }
 
     @Override
+
     public void run() {
-        // TODO Auto-generated method stub
+
         while(true){
         //for(int runs=0;runs<5;runs++){
 
             int seatNr = -1;
             try {
-                //Thread.sleep(50);
 
-                while((seatNr = myTable.getSeat())==-1){
-                    Thread.sleep(10);
+                // Versuch einen Sitzplatz zu ergattern
+                if((seatNr = myTable.getSeatOptimized())==-1){
+                    System.out.println("Probleme bei der Sitzverteilung");
                 }
-                System.out.println("Platz Nr "+seatNr+" PH "+number);
+                //System.out.println("Platz Nr "+seatNr+" PH "+number);
                 // Sitzen
+                Thread.sleep(40);
                 while(!getForks()){
                     //Warten auf Gabeln
-                    Thread.sleep(50);
+                    Thread.sleep(40);
                 }
-                System.out.println("essen auf platz nr " +seatNr+" PH "+number);
+                myTable.incEater(seatNr);
+                Thread.sleep(30);
+                //System.out.println("essen auf platz nr " +seatNr+" PH "+number);
                 myTable.returnFork(firstfork);
                 myTable.returnFork(secondfork);
+                //*/
+                //Thread.sleep(30);
 
                myTable.standUp(seatNr);
                // Ausgabe ergibt keinen Sin!
-               // System.out.println("PH "+number+" stand up");
+               //System.out.println("PH "+number+" stand up");
                 //Chillen
-                Thread.sleep(600);
+                //Thread.sleep(600);
 
             } catch (Exception e) {
             // TODO: handle exception
+                System.out.println("Problem PH thread");
             }
         }
     }
 
-    private boolean getForks(){
+    private boolean getForks() throws InterruptedException{
             //get all the forks!!!
             //first
             if(myTable.getFork(firstfork)){
                 for(int runs = 0;runs<5;runs++){
+                    Thread.sleep(10);
                     if(myTable.getFork(secondfork)) return true;
                 }
                 myTable.returnFork(firstfork);

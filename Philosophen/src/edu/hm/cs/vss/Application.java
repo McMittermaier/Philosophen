@@ -9,8 +9,8 @@ package edu.hm.cs.vss;
  */
 public class Application {
 
-    private static final int ANZ_PHILOSOPHS = 7;
-    private static final int ANZ_TABLESEATS = 5;
+    private static final int ANZ_PHILOSOPHS = 244;
+    private static final int ANZ_TABLESEATS = 8;
 
     private final static Thread[] philosophs = new Thread[ANZ_PHILOSOPHS];
 
@@ -27,9 +27,19 @@ public class Application {
             philosophs[i] = new Thread(new Philosoph(dineTable,i));
         }
         //Philosophen starten
-        for(Thread i : philosophs){
-            i.start();
+        try {
+            for(Thread i : philosophs){
+
+                i.start();
+               // i.wait();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
+
+        new Output(dineTable).start();
+
+
 
     }
 
