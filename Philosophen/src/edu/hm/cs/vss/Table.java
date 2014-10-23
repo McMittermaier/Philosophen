@@ -94,7 +94,8 @@ public class Table {
         //Zurücklegen der Gabel
         synchronized(forks.get(forknr)){
             if(forks.get(forknr)==false) forks.set(forknr, true);
-            else throw new RuntimeException("HoloFrok");
+            //else throw new RuntimeException("HoloFrok");
+            else System.out.println("holoFork");
         }
     }
 
@@ -115,5 +116,9 @@ public class Table {
 
     public int[] getAuslastung(){
         return eater;
+    }
+
+    public int getTableSize(){
+        return tableSize;
     }
 }
