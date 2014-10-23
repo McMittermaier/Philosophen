@@ -9,7 +9,7 @@ package edu.hm.cs.vss;
  */
 public class Application {
 
-    private static final int ANZ_PHILOSOPHS =6;
+    private static final int ANZ_PHILOSOPHS =10;
     private static final int ANZ_HUNGRY_PH = 1;
     private static final int ANZ_TABLESEATS = 7;
 
@@ -40,7 +40,7 @@ public class Application {
         }
 
         new Output(dineTable,philosophs).start();
-
+        new Tuersteher(dineTable,philosophs).start();
 
 
     }

@@ -23,6 +23,7 @@ public class Philosoph extends Thread {
     private final int tableSize;
 
     private int meals;
+    private boolean blocked = false;
 
     private final boolean hungryOne;
 
@@ -32,7 +33,7 @@ public class Philosoph extends Thread {
         this.hungryOne=hungryOne;
         this.tableSize=myTable.getTableSize();
         if(hungryOne){
-            MEDIATE_TIME /=5;
+            MEDIATE_TIME /=2;
         }
 
     }
@@ -48,7 +49,15 @@ public class Philosoph extends Thread {
             try {
                   for(int runs=0;runs<5;runs++){
                     // Versuch einen Sitzplatz zu ergattern
-                    if((seatNr = myTable.getSeatOptimized())==-1){
+
+                     if(blocked){
+                         blocked = false;
+                         Thread.sleep(20);
+                         //System.out.println("leg dich schlafen");
+
+                     }
+
+                     if((seatNr = myTable.getSeatOptimized())==-1){
                         System.out.println("Probleme bei der Sitzverteilung");
                     }
                     // Gabelzuteilung
@@ -112,6 +121,10 @@ public class Philosoph extends Thread {
 
     public int getMeals(){
         return meals;
+    }
+
+    public void setBlocked(){
+        this.blocked = true;
     }
 
 }

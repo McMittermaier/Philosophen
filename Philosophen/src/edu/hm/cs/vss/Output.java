@@ -13,11 +13,13 @@ public class Output extends Thread {
 
     @Override
     public void run(){
-        System.out.println("++++++++++++++++++++++++++++ Waiter "+table.getWaiters());
+        long startTime = System.currentTimeMillis();
         try {
             while(true){
 
-            Thread.sleep(1000);
+            Thread.sleep(100);
+
+            //philosophen[3].wait(50);
 
             //System.out.println("Waiter "+table.getWaiters());
 
@@ -40,11 +42,15 @@ public class Output extends Thread {
                 sumMeals += meals;
                 out = out + meals + " | ";
             }
-           System.out.println("Philosophen  "+out);
+
+            System.out.println("Philosophen  "+out+Math.round(sumMeals/(double)philosophen.length)+" Runtime "+(System.currentTimeMillis()-startTime));
+
+
             }
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("problem outputter");
+            System.out.println(e);
         }
     }
 
