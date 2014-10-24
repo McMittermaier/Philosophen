@@ -9,7 +9,7 @@ public class Table {
     //ArrayListe mit den Sitzplätzen repräsentiert durch jeweils eine semaphore mit nur einem Element
     private final ArrayList<Semaphore> seats;
     //Arrayliste mit den Gabeln hier mit booleans dargestellt
-    private final ArrayList<Boolean> forks;
+    private final ArrayList<Semaphore> forks;
     // Array wie oft an welchem platz gegessen wurde (statistik)
     private final int[] eater;
 
@@ -19,10 +19,10 @@ public class Table {
         this.tableSize = size;
         this.eater = new int[size];
         seats = new ArrayList<Semaphore>();
-        forks = new ArrayList<Boolean>();
+        forks = new ArrayList<Semaphore>();
         for(int i = 0 ; i<size;i++){
             seats.add(new Semaphore(1,true));
-            forks.add(true);
+            forks.add(new Semaphore(1,true));
         }
 
      }
@@ -38,7 +38,6 @@ public class Table {
         try {
             seats.get(startPos).acquire();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return -1;
         }
@@ -79,24 +78,31 @@ public class Table {
     }
 
     public boolean getFork(int forknr){
-        boolean ret = true;
+        /*boolean ret = true;
         //Versucht die Gabel zu bekommen
+
+        if(forks.get(forknr).tryAcquire()){
+
+        }
+
         synchronized(forks.get(forknr)){
             //Erfolgreich
-            if(forks.get(forknr)==true) forks.set(forknr, false);
+            if(forks.get(forknr)==true)forks.set(forknr, false);
             // nicht erfolgreich
             else ret = false;
         }
-        return ret;
+        return ret;*/
+        return forks.get(forknr).tryAcquire();
     }
-
     public void returnFork(int forknr){
-        //Zurücklegen der Gabel
+        forks.get(forknr).release();
+
+        /*//Zurücklegen der Gabel
         synchronized(forks.get(forknr)){
             if(forks.get(forknr)==false) forks.set(forknr, true);
             //else throw new RuntimeException("HoloFrok");
             else System.out.println("holoFork");
-        }
+        }/**/
     }
 
     public String getWaiters(){

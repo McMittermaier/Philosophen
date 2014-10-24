@@ -43,8 +43,6 @@ public class Philosoph extends Thread {
     public void run() {
 
         while(true){
-        //for(int runs=0;runs<5;runs++){
-
             seatNr = -1;
             try {
                   for(int runs=0;runs<5;runs++){
@@ -72,7 +70,7 @@ public class Philosoph extends Thread {
                     // Sitzen
                     while(!getForks()){
                         //Warten auf Gabeln
-                        Thread.sleep(EAT_TIME);
+                        //Thread.sleep(EAT_TIME);
                     }
                     //Essen
                     eat();
@@ -86,7 +84,6 @@ public class Philosoph extends Thread {
               Thread.sleep(SLEEP_TIME);
 
             } catch (Exception e) {
-            // TODO: handle exception
                 System.out.println("Problem PH thread -- " + number );
                 System.out.println(e);
             }
@@ -99,6 +96,7 @@ public class Philosoph extends Thread {
 
             if(myTable.getFork(firstfork)){
                 for(int runs = 0;runs<5;runs++){
+                //while(true){
                     //Thread.sleep(10);
                     if(myTable.getFork(secondfork)) return true;
                 }

@@ -9,8 +9,8 @@ package edu.hm.cs.vss;
  */
 public class Application {
 
-    private static final int ANZ_PHILOSOPHS =10;
-    private static final int ANZ_HUNGRY_PH = 1;
+    private static final int ANZ_PHILOSOPHS =5;
+    private static final int ANZ_HUNGRY_PH = 5;
     private static final int ANZ_TABLESEATS = 7;
 
     private final static Thread[] philosophs = new Thread[ANZ_PHILOSOPHS+ANZ_HUNGRY_PH];
@@ -21,7 +21,6 @@ public class Application {
      *
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         Table dineTable = new Table(ANZ_TABLESEATS);
         //Philosophen erzeugen
         for(int i = 0;i<ANZ_PHILOSOPHS;i++){
@@ -31,17 +30,12 @@ public class Application {
             philosophs[i] = new Philosoph(dineTable,i,true);
         }
         //Philosophen starten
-        try {
-            for(Thread i : philosophs){
-                i.start();
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
+
+        for(Thread i : philosophs){
+            i.start();
         }
-
         new Output(dineTable,philosophs).start();
-        new Tuersteher(dineTable,philosophs).start();
-
+        //new Tuersteher(dineTable,philosophs).start();
 
     }
 

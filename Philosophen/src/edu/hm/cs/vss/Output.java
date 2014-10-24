@@ -19,8 +19,6 @@ public class Output extends Thread {
 
             Thread.sleep(100);
 
-            //philosophen[3].wait(50);
-
             //System.out.println("Waiter "+table.getWaiters());
 
             String out = "";
@@ -32,7 +30,7 @@ public class Output extends Thread {
             for( int valE : table.getAuslastung()){
                 out = out + Math.round((valE/(double)sumEater)*100) + "%  | ";
             }
-           //System.out.println("Eater  "+out+ sumEater);
+           System.out.println("Eater  "+out+ sumEater);
 
             String outMeals = "";
             int sumMeals=0;
@@ -43,12 +41,11 @@ public class Output extends Thread {
                 out = out + meals + " | ";
             }
 
-            System.out.println("Philosophen  "+out+Math.round(sumMeals/(double)philosophen.length)+" Runtime "+(System.currentTimeMillis()-startTime));
+            //System.out.println("Philosophen  "+out+Math.round(sumMeals/(double)philosophen.length)+" Runtime "+(System.currentTimeMillis()-startTime));
 
 
             }
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println("problem outputter");
             System.out.println(e);
         }

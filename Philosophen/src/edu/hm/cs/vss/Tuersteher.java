@@ -10,14 +10,12 @@ public class Tuersteher extends Thread {
         this.myTable = myTable;
     }
 
-
     @Override
     public void run(){
         while(true){
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -25,8 +23,9 @@ public class Tuersteher extends Thread {
             for( Thread t :philosophen){
                 sumMeals += ((Philosoph)t).getMeals();
             }
+            double med = (sumMeals/(double)philosophen.length)+10;
             for( Thread t :philosophen){
-                if(((Philosoph)t).getMeals()>(sumMeals/(double)philosophen.length)+10){
+                if(((Philosoph)t).getMeals()>med){
                     //System.out.println("Blocke Thread"+ ((Philosoph)t).getId());
                     ((Philosoph)t).setBlocked();
 
